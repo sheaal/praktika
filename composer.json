@@ -1,11 +1,12 @@
 {
-    "name": "sheaal/php1",
-    "description": "php1",
+    "name": "sheaal/praktika",
+    "description": "praktika",
     "type": "project",
     "license": "MIT",
     "authors": [
         {
-            "name": "sheaal"
+            "name": "sheaal",
+            "email": "alisandra.sh05@gmail.com"
         }
     ],
     "minimum-stability": "dev",
@@ -19,4 +20,3 @@
         }
     }
 }
-
