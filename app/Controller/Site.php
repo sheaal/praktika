@@ -26,65 +26,40 @@ class Site
 
     public function signup(Request $request): string
     {
-        if ($request->method==='POST' && User::create($request->all())){
-            return new View('site.signup', ['message'=>'Вы успешно зарегистрированы']);
+        if ($request->method === 'POST' && User::create($request->all())) {
+            return new View('site.signup', ['message' => 'Вы успешно зарегистрированы']);
         }
         return new View('site.signup');
     }
 
-    public function login(Request $request): string
+    public function login(): string
     {
-        //Если просто обращение к странице, то отобразить форму
-        if ($request->method === 'GET') {
-            return new View('site.login');
-        }
-        //Если удалось аутентифицировать пользователя, то редирект
-        if (Auth::attempt($request->all())) {
-            app()->route->redirect('/hello');
-        }
-        //Если аутентификация не удалась, то сообщение об ошибке
-        return new View('site.login', ['message' => 'Неправильные логин или пароль']);
+        return new View('site.login', ['message' => 'hello working']);
+    }
+    public function logout(): string
+    {
+        return new View('site.logout', ['message' => 'hello working']);
+    }
+    public function search(): string
+    {
+        return new View('site.search', ['message' => 'hello working']);
     }
 
-    public function logout(): void
+    public function addBook(): string
     {
-        Auth::logout();
-        app()->route->redirect('/hello');
+        return new View('site.add_book', ['message' => 'hello working']);
     }
-
-    public function search(Request $request): string
+    public function addReader(): string
     {
-        return new View('site.search');
+        return new View('site.add_reader', ['message' => 'hello working']);
     }
-//    public function search(Request $request)
-//    {
-//        $author = $request->get('author');
-//        $title = $request->get('title');
-//        $documentType = $request->get('document-type');
-//
-//        // Дальнейшая логика обработки запроса, например, поиск в базе данных
-//
-//        return new View('site.search', ['author' => $author, 'title' => $title, 'documentType' => $documentType]);
-//    }
-
-    public function addBook(Request $request): void
+    public function addLibrarian(): string
     {
-        if ($request->method === 'POST') {
-            // Добавить вашу логику для добавления новой книги здесь.
-
-            // После успешного добавления книги, выполнить редирект на другую страницу.
-            app()->route->redirect('/hello'); // Например, перенаправим на главную страницу.
-        } else {
-            // Обработка других случаев, например, показ сообщения об ошибке или перенаправление на страницу ошибки.
-        }
+        return new View('site.add_librarian', ['message' => 'hello working']);
     }
-//    public function addBook(Request $request): void
-//    {
-//        // Add your logic for adding a new book here.
-//
-//        // Redirect back to the main page after adding the book.
-//        app()->route->redirect('/add_book');
-//    }
-
+    public function selection(): string
+    {
+        return new View('site.selection', ['message' => 'hello working']);
+    }
 
 }

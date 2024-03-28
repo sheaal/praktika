@@ -9,7 +9,8 @@
 
     <style>
         nav{
-            background-color: darkgray;
+            background-color: #846693;
+
             height: 50px;
         }
         header{
@@ -17,30 +18,52 @@
         }
         a{
             margin-left: 20px;
+            color: white;
+            text-decoration: none;
         }
+        a:hover{
+            text-shadow: white 1px 0 10px;
+        }
+
         .block-book1{
             /*width: 800px;*/
             margin: auto;
             padding: 40px;
             justify-content: center;
             display: flex;
+
         }
         .book{
-            background-color: black;
+            background-color: #472d6d;
             display: inline-block;
             color: aliceblue;
             width: 300px;
             height: 400px;
             margin-left: 10px;
+            border-radius: 10px;
 
         }
         h1{
             display: flex;
-            align-items: flex-end;
+
+            justify-content: center;
         }
         button{
             display: flex;
             align-items: flex-end;
+            color: white;
+            background-color: #7e60a8;
+            border-radius: 5px;
+            margin-left: 7px;
+        }
+        section{
+            display: flex;
+            align-items: flex-end;
+            bottom: 0;
+
+        }
+        button:hover{
+            box-shadow: black 1px 0 10px;
         }
     </style>
 </head>
@@ -53,11 +76,15 @@
         <a href="<?= app()->route->getUrl('/add_reader') ?>">Добавление читателей</a>
         <a href="<?= app()->route->getUrl('/add_librarian') ?>">Добавление библиотекарей</a>
         <a href="<?= app()->route->getUrl('/selection') ?>">Выборка</a>
+
         <?php
         if (!app()->auth::check()):
             ?>
             <a href="<?= app()->route->getUrl('/search') ?>">Поиск</a>
             <a href="<?= app()->route->getUrl('/add_book') ?>">Добавить книгу</a>
+            <a href="<?= app()->route->getUrl('/add_reader') ?>">Добавление читателей</a>
+            <a href="<?= app()->route->getUrl('/add_librarian') ?>">Добавление библиотекарей</a>
+            <a href="<?= app()->route->getUrl('/selection') ?>">Выборка</a>
             <a href="<?= app()->route->getUrl('/login') ?>">Вход</a>
             <a href="<?= app()->route->getUrl('/signup') ?>">Регистрация</a>
         <?php
@@ -72,6 +99,8 @@
 //        });
         ?>
     </nav>
+
+
 </header>
 
 <main>
