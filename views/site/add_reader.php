@@ -14,6 +14,15 @@
         input[type="submit"] {
             margin-top: 10px;
         }
+        button{
+            display: flex;
+            align-items: flex-end;
+            color: white;
+            background-color: #7e60a8;
+            border-radius: 5px;
+            margin-left: 7px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -43,7 +52,7 @@
     <label for="phone">Номер телефона:</label>
     <input type="tel" id="phone" name="phone">
 
-    <input type="submit" value="Добавить">
+    <button type="submit">Добавить</button>
 </form>
 </body>
 </html>

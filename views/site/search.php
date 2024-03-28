@@ -20,21 +20,25 @@
             float: left;
         }
         .search-block2 {
-            margin-top: 30px;
             margin-right: 300px;
             float: right;
         }
-        button{
-            top: 50px;
+        fieldset{
             display: flex;
-            justify-content: center;
+            flex-direction: column;
         }
+        button{
+            margin-top: 50px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
     </style>
 </head>
 <body>
 <header>
-        <h1>Поиск</h1>
-
+    <h1>Поиск</h1>
 </header>
 <main>
     <form id="search-form">
@@ -47,17 +51,18 @@
         </div>
 
         <div class="search-block2">
-        <br>
-            <label for="document-type">Тип документа:</label>
-            <select id="document-type" name="document-type">
-                <option value="books">Книги</option>
-                <option value="articles">Многотомные издания</option>
-                <option value="articles">Статьи</option>
-                <option value="articles">Диссертации</option>
-                <option value="articles">Журналы, газеты</option>
-            </select>
-        <br>
+            <br>
+            <fieldset id="document-type">
+                <legend>Тип документа:</legend>
+                <label><input type="checkbox" value="books" name="document-type">Книги</label>
+                <label><input type="checkbox" value="articles" name="document-type">Многотомные издания</label>
+                <label><input type="checkbox" value="articles" name="document-type">Статьи</label>
+                <label><input type="checkbox" value="articles" name="document-type">Диссертации</label>
+                <label><input type="checkbox" value="articles" name="document-type">Журналы, газеты</label>
+            </fieldset>
+            <br>
         </div>
+        <br>
         <button type="submit">Найти</button>
     </form>
 </main>

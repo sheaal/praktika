@@ -7,7 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Добавление книги</title>
 </head>
+<style>
+    form{
+        margin-top: 20px;
+    }
+</style>
 <body>
+<h1>Добавление книги</h1>
 <form action="<?= app()->route->getUrl('/add_book') ?>" method="post">
 
     <label for="author">Автор:</label>
