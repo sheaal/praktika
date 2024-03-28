@@ -9,7 +9,9 @@ use Src\View;
 use Src\Request;
 use Model\User;
 
+
 class Site
+
 {
 //    public function index(): string
 //    {
@@ -49,6 +51,40 @@ class Site
         Auth::logout();
         app()->route->redirect('/hello');
     }
+
+    public function search(Request $request): string
+    {
+        return new View('site.search');
+    }
+//    public function search(Request $request)
+//    {
+//        $author = $request->get('author');
+//        $title = $request->get('title');
+//        $documentType = $request->get('document-type');
+//
+//        // Дальнейшая логика обработки запроса, например, поиск в базе данных
+//
+//        return new View('site.search', ['author' => $author, 'title' => $title, 'documentType' => $documentType]);
+//    }
+
+    public function addBook(Request $request): void
+    {
+        if ($request->method === 'POST') {
+            // Добавить вашу логику для добавления новой книги здесь.
+
+            // После успешного добавления книги, выполнить редирект на другую страницу.
+            app()->route->redirect('/hello'); // Например, перенаправим на главную страницу.
+        } else {
+            // Обработка других случаев, например, показ сообщения об ошибке или перенаправление на страницу ошибки.
+        }
+    }
+//    public function addBook(Request $request): void
+//    {
+//        // Add your logic for adding a new book here.
+//
+//        // Redirect back to the main page after adding the book.
+//        app()->route->redirect('/add_book');
+//    }
 
 
 }

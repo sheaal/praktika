@@ -8,6 +8,7 @@ use Src\Auth\IdentityInterface;
 use Src\Request;
 use Src\View;
 
+
 class User extends Model implements IdentityInterface
 {
     use HasFactory;
