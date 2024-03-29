@@ -6,3 +6,4 @@
     <label>Пароль <input type="password" name="password"></label>
     <button>Зарегистрироваться</button>
 </form>
+<p>jclajdf</p>
