@@ -8,6 +8,7 @@ use Src\Auth\Auth;
 use Src\View;
 use Src\Request;
 use Model\User;
+use Src\Validator\Validator;
 
 
 class Site
@@ -26,10 +27,6 @@ class Site
         }
         return new View('site.signup');
     }
-//        if ($request->method === 'POST' && User::create($request->all())) {
-//            return new View('site.signup', ['message' => 'Вы успешно зарегистрированы']);
-//        }
-//        return new View('site.signup');
 
     public function login(Request $request): string
     {
@@ -55,14 +52,34 @@ class Site
     {
         return new View('site.search', ['message' => 'hello working']);
     }
-    public function addBook(): string
-    {
-        return new View('site.add_book', ['message' => 'hello working']);
-    }
+//    public function addBook(): string
+//    {
+//        return new View('site.add_book', ['message' => 'hello working']);
+//    }
     public function addReader(): string
     {
         return new View('site.add_reader', ['message' => 'hello working']);
     }
+    public function addBook(): string
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Получение данных из формы
+            $author = $_POST['author'];
+            $title = $_POST['title'];
+            $new_edition = $_POST['new_edition'];
+            $annotation = $_POST['annotation'];
+
+            // Здесь должен быть код для добавления книги в базу данных или другое хранилище данных
+
+            // Переадресация на главную страницу после успешного добавления
+            header('Location: ' . app()->route->getUrl('/hello'));
+            exit;
+        }
+
+        // Если не была отправлена форма, просто выводим вид страницы добавления книги
+        return new View('site.add_book', ['message' => 'hello working']);
+    }
+
     public function addLibrarian(): string
     {
         return new View('site.add_librarian', ['message' => 'hello working']);
@@ -73,3 +90,12 @@ class Site
     }
 
 }
+
+//class Books
+//{
+//    public static function addBook(string $author, string $title, int $newEdition, string $annotation): void
+//    {
+//        // Add the book to the list of books
+//        // ...
+//    }
+//}

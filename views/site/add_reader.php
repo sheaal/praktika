@@ -15,6 +15,9 @@
             margin-top: 10px;
         }
         button{
+            background-color: #7e60a8;
+        }
+        .read-btn{
             display: flex;
             align-items: flex-end;
             color: white;
@@ -52,7 +55,7 @@
     <label for="phone">Номер телефона:</label>
     <input type="tel" id="phone" name="phone">
 
-    <button type="submit">Добавить</button>
+    <button class="read-btn" type="submit">Добавить</button>
 </form>
 </body>
 </html>

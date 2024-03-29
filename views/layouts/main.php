@@ -47,7 +47,7 @@
             display: flex;
             justify-content: center;
         }
-        button{
+        .hel-btn{
             display: flex;
             align-items: flex-end;
             color: white;
@@ -68,20 +68,24 @@
 </head>
 <body>
 <header>
+
 <!--    <nav>-->
 <!--        <a href="--><?php //= app()->route->getUrl('/hello') ?><!--">Главная</a>-->
 <!--        <a href="--><?php //= app()->route->getUrl('/search') ?><!--">Поиск</a>-->
-<!--        <a href="--><?php //= app()->route->getUrl('/signup') ?><!--">Регистрация</a>-->
-<!--        <a href="--><?php //= app()->route->getUrl('/login') ?><!--">Вход</a>-->
+<!--        --><?php //if (!app()->auth::check()): ?>
+<!--            <a href="--><?php //= app()->route->getUrl('/signup') ?><!--">Регистрация</a>-->
+<!--            <a href="--><?php //= app()->route->getUrl('/login') ?><!--">Вход</a>-->
+<!--        --><?php //endif; ?>
 <!--        --><?php //if (app()->auth::check()): ?>
 <!--            <a href="--><?php //= app()->route->getUrl('/add_book') ?><!--">Добавление книг</a>-->
 <!--            <a href="--><?php //= app()->route->getUrl('/add_reader') ?><!--">Добавление читателей</a>-->
 <!--            <a href="--><?php //= app()->route->getUrl('/add_librarian') ?><!--">Добавление библиотекарей</a>-->
-<!---->
-<!--        --><?php //endif; ?>
 <!--            <a href="--><?php //= app()->route->getUrl('/logout') ?><!--">Выход (--><?php //= app()->auth::user()->name ?><!--)</a>-->
-<!--            <a href="--><?php //= app()->route->getUrl('/selection') ?><!--">Выборка</a>-->
+<!--        --><?php //endif; ?>
+<!---->
+<!--        <a href="--><?php //= app()->route->getUrl('/selection') ?><!--">Выборка</a>-->
 <!--    </nav>-->
+
     <nav>
         <a href="<?= app()->route->getUrl('/hello') ?>">Главная</a>
         <a href="<?= app()->route->getUrl('/search') ?>">Поиск</a>
@@ -90,15 +94,18 @@
             <a href="<?= app()->route->getUrl('/login') ?>">Вход</a>
         <?php endif; ?>
         <?php if (app()->auth::check()): ?>
-            <a href="<?= app()->route->getUrl('/add_book') ?>">Добавление книг</a>
-            <a href="<?= app()->route->getUrl('/add_reader') ?>">Добавление читателей</a>
-            <a href="<?= app()->route->getUrl('/add_librarian') ?>">Добавление библиотекарей</a>
+            <?php if (app()->auth::user()->id_role == 1): // 1 = Администратор?>
+                <a href="<?= app()->route->getUrl('/signup') ?>">Добавление библиотекарей</a>
+                <a href="<?= app()->route->getUrl('/selection') ?>">Выборка</a>
+            <?php elseif (app()->auth::user()->id_role == 2): // 2 = Библиотека?>
+                <a href="<?= app()->route->getUrl('/signup') ?>">Регистрация</a>
+                <a href="<?= app()->route->getUrl('/add_book') ?>">Добавление книг</a>
+                <a href="<?= app()->route->getUrl('/add_reader') ?>">Добавление читателей</a>
+            <?php endif; ?>
             <a href="<?= app()->route->getUrl('/logout') ?>">Выход (<?= app()->auth::user()->name ?>)</a>
         <?php endif; ?>
 
-        <a href="<?= app()->route->getUrl('/selection') ?>">Выборка</a>
     </nav>
-
 </header>
 
 <main>

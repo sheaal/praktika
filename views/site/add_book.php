@@ -13,6 +13,7 @@
     }
 </style>
 <body>
+<form action="<?= app()->route->getUrl('/add_book') ?>" method="post">
 <h1>Добавление книги</h1>
 <form action="<?= app()->route->getUrl('/add_book') ?>" method="post">
 

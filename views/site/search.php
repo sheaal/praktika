@@ -14,6 +14,11 @@
             margin-top: 20px;
             margin-left: 20px;
         }
+        button{
+            background-color: #7e60a8;
+            border-radius: 5px;
+            color: white;
+        }
         .search-block1 {
             margin-top: 30px;
             margin-left: 300px;
@@ -27,7 +32,7 @@
             display: flex;
             flex-direction: column;
         }
-        button{
+        .sear-btn{
             margin-top: 50px;
             display: block;
             margin-left: auto;
@@ -63,7 +68,7 @@
             <br>
         </div>
         <br>
-        <button type="submit">Найти</button>
+        <button class="sear-btn" type="submit">Найти</button>
     </form>
 </main>
 
