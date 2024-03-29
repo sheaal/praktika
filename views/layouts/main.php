@@ -71,15 +71,10 @@
     <nav>
         <a href="<?= app()->route->getUrl('/hello') ?>">Главная</a>
         <a href="<?= app()->route->getUrl('/search') ?>">Поиск</a>
-<!--        <a href="--><?php //= app()->route->getUrl('/add_book') ?><!--">Добавление книг</a>-->
-<!--        <a href="--><?php //= app()->route->getUrl('/add_reader') ?><!--">Добавление читателей</a>-->
-<!--        <a href="--><?php //= app()->route->getUrl('/add_librarian') ?><!--">Добавление библиотекарей</a>-->
-<!--        <a href="--><?php //= app()->route->getUrl('/selection') ?><!--">Выборка</a>-->
 
         <?php
         if (!app()->auth::check()):
             ?>
-<!--            <a href="--><?php //= app()->route->getUrl('/search') ?><!--">Поиск</a>-->
             <a href="<?= app()->route->getUrl('/add_book') ?>">Добавление книг</a>
             <a href="<?= app()->route->getUrl('/add_reader') ?>">Добавление читателей</a>
             <a href="<?= app()->route->getUrl('/add_librarian') ?>">Добавление библиотекарей</a>
@@ -92,9 +87,6 @@
         <?php
         endif;
 
-//        app()->route->get('/search', function () {
-//            return (new Controller\Site())->search();
-//        });
         ?>
     </nav>
 
