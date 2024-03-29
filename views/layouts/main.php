@@ -45,7 +45,6 @@
         }
         h1{
             display: flex;
-
             justify-content: center;
         }
         button{
@@ -86,7 +85,6 @@
             <a href="<?= app()->route->getUrl('/add_librarian') ?>">Добавление библиотекарей</a>
             <a href="<?= app()->route->getUrl('/selection') ?>">Выборка</a>
             <a href="<?= app()->route->getUrl('/login') ?>">Вход</a>
-            <a href="<?= app()->route->getUrl('/signup') ?>">Регистрация</a>
         <?php
         else:
             ?>

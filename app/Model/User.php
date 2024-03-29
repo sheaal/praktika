@@ -15,11 +15,7 @@ class User extends Model implements IdentityInterface
 
     public $timestamps = false;
     protected $fillable = [
-        'surname',
         'name',
-        'patronymic',
-        'read_address',
-        'phone',
         'login',
         'password'
     ];
@@ -34,13 +30,13 @@ class User extends Model implements IdentityInterface
 
     public function findIdentity(int $id)
     {
-        return self::where('id_read_ticket', $id)->first();
+        return self::where('id', $id)->first();
     }
 
     //Возврат первичного ключа
     public function getId(): int
     {
-        return $this->id_read_ticket;
+        return $this->id;
     }
 
     //Возврат аутентифицированного пользователя
