@@ -8,7 +8,7 @@
     <title>Поиск</title>
     <style>
         header{
-            width: 1920px;
+            width: 100%;
         }
         h1{
             margin-top: 20px;

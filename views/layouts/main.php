@@ -14,7 +14,7 @@
             height: 50px;
         }
         header{
-            width: 1920px;
+            width: 100%;
         }
         a{
             margin-left: 20px;
@@ -68,28 +68,36 @@
 </head>
 <body>
 <header>
+<!--    <nav>-->
+<!--        <a href="--><?php //= app()->route->getUrl('/hello') ?><!--">Главная</a>-->
+<!--        <a href="--><?php //= app()->route->getUrl('/search') ?><!--">Поиск</a>-->
+<!--        <a href="--><?php //= app()->route->getUrl('/signup') ?><!--">Регистрация</a>-->
+<!--        <a href="--><?php //= app()->route->getUrl('/login') ?><!--">Вход</a>-->
+<!--        --><?php //if (app()->auth::check()): ?>
+<!--            <a href="--><?php //= app()->route->getUrl('/add_book') ?><!--">Добавление книг</a>-->
+<!--            <a href="--><?php //= app()->route->getUrl('/add_reader') ?><!--">Добавление читателей</a>-->
+<!--            <a href="--><?php //= app()->route->getUrl('/add_librarian') ?><!--">Добавление библиотекарей</a>-->
+<!---->
+<!--        --><?php //endif; ?>
+<!--            <a href="--><?php //= app()->route->getUrl('/logout') ?><!--">Выход (--><?php //= app()->auth::user()->name ?><!--)</a>-->
+<!--            <a href="--><?php //= app()->route->getUrl('/selection') ?><!--">Выборка</a>-->
+<!--    </nav>-->
     <nav>
         <a href="<?= app()->route->getUrl('/hello') ?>">Главная</a>
         <a href="<?= app()->route->getUrl('/search') ?>">Поиск</a>
-
-        <?php
-        if (!app()->auth::check()):
-            ?>
+        <?php if (!app()->auth::check()): ?>
+            <a href="<?= app()->route->getUrl('/signup') ?>">Регистрация</a>
+            <a href="<?= app()->route->getUrl('/login') ?>">Вход</a>
+        <?php endif; ?>
+        <?php if (app()->auth::check()): ?>
             <a href="<?= app()->route->getUrl('/add_book') ?>">Добавление книг</a>
             <a href="<?= app()->route->getUrl('/add_reader') ?>">Добавление читателей</a>
             <a href="<?= app()->route->getUrl('/add_librarian') ?>">Добавление библиотекарей</a>
-            <a href="<?= app()->route->getUrl('/selection') ?>">Выборка</a>
-            <a href="<?= app()->route->getUrl('/login') ?>">Вход</a>
-        <?php
-        else:
-            ?>
             <a href="<?= app()->route->getUrl('/logout') ?>">Выход (<?= app()->auth::user()->name ?>)</a>
-        <?php
-        endif;
+        <?php endif; ?>
 
-        ?>
+        <a href="<?= app()->route->getUrl('/selection') ?>">Выборка</a>
     </nav>
-
 
 </header>
 
