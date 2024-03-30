@@ -37,6 +37,9 @@
             <p>Автор: <?= htmlspecialchars($book->id_author) ?></p>
             <p>Аннотация: <?= htmlspecialchars($book->annotation) ?></p>
             <p>Новое издание: <?= htmlspecialchars($book->new_edition == 1 ? 'Да' : 'Нет') ?></p>
+<!--            <img src="--><?php //= htmlspecialchars($book->image) ?><!--" alt="--><?php //= htmlspecialchars($book->title) ?><!--">-->
+            <h2><?= htmlspecialchars($book->title) ?></h2>
         </div>
     <?php endforeach; ?>
+
 </div>

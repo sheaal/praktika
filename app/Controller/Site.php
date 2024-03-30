@@ -5,6 +5,7 @@ namespace Controller;
 use Illuminate\Database\Capsule\Manager as DB;
 use Model\Post;
 use Model\Book;
+use Model\Reader;
 use Src\Auth\Auth;
 use Src\View;
 use Src\Request;
@@ -115,20 +116,52 @@ class Site
         // Display the search form
         return new View('site.search', ['message' => 'hello working']);
     }
-    public function addReader(): string
+    public function addReader(Request $request): string
     {
-        return new View('site.add_reader', ['message' => 'hello working']);
+        $title = Reader::all();
+        if ($request->method === 'POST' && Reader::create($request->all())) {
+            $message = 'Читатель успешно добавлен!';
+        } else {
+            $message = '';
+        }
+
+        return new View('site.add_reader', ['title' => $title, 'message' => $message]);
     }
 
 
     public function addBook(Request $request): string
     {
         $title = Book::all();
-        if ($request->method === 'POST'&& Book::create($request->all())){
-            app()->route->redirect('/add_book');
+        if ($request->method === 'POST' && Book::create($request->all())) {
+            $message = 'Книга успешно добавлена!';
+        } else {
+            $message = '';
         }
-        return new View('site.add_book', ['title' => $title]);
+
+        return new View('site.add_book', ['title' => $title, 'message' => $message]);
     }
+//    public function addBook(Request $request): string
+//    {
+//        $title = Book::all();
+//        $message = '';
+//
+//        if ($request->method === 'POST') {
+//            $data = $request->all();
+//
+//            // Handle image upload
+//            if (isset($data['image']) && $data['image']['name']) {
+//                $imageName = time() . '_' . basename($data['image']['name']);
+//                move_uploaded_file($data['image']['tmp_name'], public_path('images') . $imageName);
+//                $data['image'] = 'images/' . $imageName;
+//            }
+//
+//            Book::create($data);
+//            $message = 'Книга успешно добавлена!';
+//        }
+//
+//        return new View('site.add_book', ['title' => $title, 'message' => $message]);
+//    }
+
 
     public function addLibrarian(): string
     {

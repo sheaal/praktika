@@ -31,11 +31,16 @@
 
 <body>
 
-<form class="form-book" method="post">
+<form class="form-book" method="post" enctype="multipart/form-data">
+
+<!--    <label for="image">Обложка:</label>-->
+<!--    <input type="file" id="image" name="image"><br><br>-->
+
     <h1>Добавление книги</h1>
 
     <div class="form-cont">
             <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
+
             <label for="author">Автор:</label>
             <input type="text" id="author" name="id_author"><br><br>
 
@@ -52,6 +57,10 @@
             <textarea id="annotation" name="annotation"></textarea><br><br>
 
             <button type="submit">Добавить</button>
+
+            <?php if ($message): ?>
+                <h3><?= htmlspecialchars($message) ?></h3>
+            <?php endif; ?>
     </div>
 
 </form>

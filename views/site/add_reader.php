@@ -26,36 +26,59 @@
             margin-left: 7px;
             margin-top: 20px;
         }
+        .read-cont{
+            margin-left: 20px;
+            justify-content: center;
+            display: flex;
+        }
+        .read-block{
+            margin-top: 40px;
+            background-color: #472d6d;
+            width: 800px;
+            height: 400px;
+            padding-left: 10px;
+            padding-top: 10px;
+            color: white;
+            border-radius: 10px;
+        }
     </style>
+
 </head>
 <body>
 <h1>Добавление читателя</h1>
-<form action="<?= app()->route->getUrl('/add_reader') ?>" method="POST">
-    <label for="card_number">Номер читательского билета:</label>
-    <input type="text" id="card_number" name="card_number" required>
+<form class="read-cont" method="POST">
+    <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
+    <div class="read-block">
+        <label for="card_number">Номер читательского билета:</label>
+        <input type="text" id="card_number" name="card_number" required>
 
-    <label for="surname">Фамилия:</label>
-    <input type="text" id="surname" name="surname" required>
+        <label for="surname">Фамилия:</label>
+        <input type="text" id="surname" name="surname" required>
 
-    <label for="name">Имя:</label>
-    <input type="text" id="name" name="name" required>
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" required>
 
-    <label for="patronymic">Отчество:</label>
-    <input type="text" id="patronymic" name="patronymic">
+        <label for="patronymic">Отчество:</label>
+        <input type="text" id="patronymic" name="patronymic">
 
-    <label for="gender">Пол:</label>
-    <select id="gender" name="gender">
-        <option value="male">Мужской</option>
-        <option value="female">Женский</option>
-    </select>
+        <label for="gender">Пол:</label>
+        <select id="gender" name="gender">
+            <option value="male">Мужской</option>
+            <option value="female">Женский</option>
+        </select>
 
-    <label for="address">Адрес:</label>
-    <input type="text" id="address" name="address" required>
+        <label for="address">Адрес:</label>
+        <input type="text" id="address" name="address" required>
 
-    <label for="phone">Номер телефона:</label>
-    <input type="tel" id="phone" name="phone">
+        <label for="phone">Номер телефона:</label>
+        <input type="tel" id="phone" name="phone">
 
-    <button class="read-btn" type="submit">Добавить</button>
+        <button class="read-btn" type="submit">Добавить</button>
+
+        <?php if ($message): ?>
+            <h3><?= htmlspecialchars($message) ?></h3>
+        <?php endif; ?>
+    </div>
 </form>
 </body>
 </html>
