@@ -6,6 +6,7 @@
     <title>Выборка</title>
 </head>
 <style>
+
     section{
         display: inline-block;
         background-color: #472d6d;
@@ -45,6 +46,8 @@
 <body>
 <h1>Выборка</h1>
 <div class="sel-block">
+
+
     <section>
         <h1>Книги на руках</h1>
         <div class="p-block" >

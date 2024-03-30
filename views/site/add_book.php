@@ -8,31 +8,53 @@
     <title>Добавление книги</title>
 </head>
 <style>
-    form{
-        margin-top: 20px;
+    .form-book{
+        margin-top: 40px;
+        background-color: #472d6d;
+        width: 800px;
+        height: 300px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        color: white;
+        border-radius: 10px;
+    }
+    .form-cont{
+        margin-left: 20px;
+    }
+    button{
+        background-color: #7e60a8;
+        border-radius: 5px;
+        color: white;
     }
 </style>
+
 <body>
-<form action="<?= app()->route->getUrl('/add_book') ?>" method="post">
-<h1>Добавление книги</h1>
-<form action="<?= app()->route->getUrl('/add_book') ?>" method="post">
 
-    <label for="author">Автор:</label>
-    <input type="text" id="author" name="author"><br><br>
+<form class="form-book" method="post">
+    <h1>Добавление книги</h1>
 
-    <label for="title">Название:</label>
-    <input type="text" id="title" name="title"><br><br>
+    <div class="form-cont">
+            <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
+            <label for="author">Автор:</label>
+            <input type="text" id="author" name="id_author"><br><br>
 
-    <label for="new_edition">Является ли новым изданием:</label>
-    <select id="new_edition" name="new_edition">
-        <option value="1">Да</option>
-        <option value="0">Нет</option>
-    </select><br><br>
+            <label for="title">Название:</label>
+            <input type="text" id="title" name="title"><br><br>
 
-    <label for="annotation">Краткая аннотация:</label>
-    <textarea id="annotation" name="annotation"></textarea><br><br>
+            <label for="new_edition">Является ли новым изданием:</label>
+            <select id="new_edition" name="new_edition">
+                <option value="1">Да</option>
+                <option value="0">Нет</option>
+            </select><br><br>
 
-    <button type="submit">Добавить</button>
+            <label for="annotation">Краткая аннотация:</label>
+            <textarea id="annotation" name="annotation"></textarea><br><br>
+
+            <button type="submit">Добавить</button>
+    </div>
+
 </form>
+
 </body>
 </html>

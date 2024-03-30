@@ -35,7 +35,6 @@
         }
         .book{
             background-color: #472d6d;
-            display: inline-block;
             color: aliceblue;
             width: 300px;
             height: 400px;
@@ -56,9 +55,11 @@
             margin-left: 7px;
         }
         section{
-            display: flex;
-            align-items: flex-end;
-            bottom: 0;
+
+
+        }
+        .book-text{
+
 
         }
         button:hover{
@@ -68,23 +69,6 @@
 </head>
 <body>
 <header>
-
-<!--    <nav>-->
-<!--        <a href="--><?php //= app()->route->getUrl('/hello') ?><!--">Главная</a>-->
-<!--        <a href="--><?php //= app()->route->getUrl('/search') ?><!--">Поиск</a>-->
-<!--        --><?php //if (!app()->auth::check()): ?>
-<!--            <a href="--><?php //= app()->route->getUrl('/signup') ?><!--">Регистрация</a>-->
-<!--            <a href="--><?php //= app()->route->getUrl('/login') ?><!--">Вход</a>-->
-<!--        --><?php //endif; ?>
-<!--        --><?php //if (app()->auth::check()): ?>
-<!--            <a href="--><?php //= app()->route->getUrl('/add_book') ?><!--">Добавление книг</a>-->
-<!--            <a href="--><?php //= app()->route->getUrl('/add_reader') ?><!--">Добавление читателей</a>-->
-<!--            <a href="--><?php //= app()->route->getUrl('/add_librarian') ?><!--">Добавление библиотекарей</a>-->
-<!--            <a href="--><?php //= app()->route->getUrl('/logout') ?><!--">Выход (--><?php //= app()->auth::user()->name ?><!--)</a>-->
-<!--        --><?php //endif; ?>
-<!---->
-<!--        <a href="--><?php //= app()->route->getUrl('/selection') ?><!--">Выборка</a>-->
-<!--    </nav>-->
 
     <nav>
         <a href="<?= app()->route->getUrl('/hello') ?>">Главная</a>

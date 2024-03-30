@@ -46,7 +46,7 @@
     <h1>Поиск</h1>
 </header>
 <main>
-    <form id="search-form">
+    <form id="search-form" >
         <div class="search-block1">
             <label for="author">Автор:</label>
             <input type="text" id="author" name="author">

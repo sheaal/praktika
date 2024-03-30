@@ -4,6 +4,7 @@ namespace Controller;
 
 use Illuminate\Database\Capsule\Manager as DB;
 use Model\Post;
+use Model\Book;
 use Src\Auth\Auth;
 use Src\View;
 use Src\Request;
@@ -17,7 +18,8 @@ class Site
 
     public function hello(): string
     {
-        return new View('site.hello', ['message' => 'hello working']);
+        $books = Book::all();
+        return new View('site.hello', ['books' => $books]);
     }
 
     public function signup(Request $request): string
@@ -68,34 +70,64 @@ class Site
 
     public function search(): string
     {
+        if (isset($_POST['search'])) {
+            // Validate the search form
+            $validation = new Validator($_POST, [
+                'author' => [new RequireValidator()],
+                'title' => [new RequireValidator()],
+                'document-type' => [new RequireValidator()],
+            ], [
+                'document-type' => 'Тип документа',
+            ]);
+
+            if (!$validation->isValid()) {
+                // Display the search form with error messages
+                return new View('site.search', [
+                    'message' => 'hello working',
+                    'errors' => $validation->getErrors(),
+                ]);
+            }
+
+            // Perform the search
+            $query = DB::table('documents');
+
+            if ($_POST['author']) {
+                $query->where('author', 'like', '%' . $_POST['author'] . '%');
+            }
+
+            if ($_POST['title']) {
+                $query->where('title', 'like', '%' . $_POST['title'] . '%');
+            }
+
+            if ($_POST['document-type']) {
+                $query->where('document-type', $_POST['document-type']);
+            }
+
+            $results = $query->get();
+
+            // Display the search results
+            return new View('site.search_results', [
+                'message' => 'hello working',
+                'results' => $results,
+            ]);
+        }
+
+        // Display the search form
         return new View('site.search', ['message' => 'hello working']);
     }
-//    public function addBook(): string
-//    {
-//        return new View('site.add_book', ['message' => 'hello working']);
-//    }
     public function addReader(): string
     {
         return new View('site.add_reader', ['message' => 'hello working']);
     }
-    public function addBook(): string
+
+
+    public function addBook(Request $request): string
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Получение данных из формы
-            $author = $_POST['author'];
-            $title = $_POST['title'];
-            $new_edition = $_POST['new_edition'];
-            $annotation = $_POST['annotation'];
-
-            // Здесь должен быть код для добавления книги в базу данных или другое хранилище данных
-
-            // Переадресация на главную страницу после успешного добавления
-            header('Location: ' . app()->route->getUrl('/hello'));
-            exit;
+        $title = Book::all();
+        if ($request->method === 'POST'&& Book::create($request->all())){
+            app()->route->redirect('/add_book');
         }
-
-        // Если не была отправлена форма, просто выводим вид страницы добавления книги
-        return new View('site.add_book', ['message' => 'hello working']);
+        return new View('site.add_book', ['title' => $title]);
     }
 
     public function addLibrarian(): string
@@ -109,11 +141,3 @@ class Site
 
 }
 
-//class Books
-//{
-//    public static function addBook(string $author, string $title, int $newEdition, string $annotation): void
-//    {
-//        // Add the book to the list of books
-//        // ...
-//    }
-//}
