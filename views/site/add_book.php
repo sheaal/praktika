@@ -33,8 +33,8 @@
 
 <form class="form-book" method="post" enctype="multipart/form-data">
 
-<!--    <label for="image">Обложка:</label>-->
-<!--    <input type="file" id="image" name="image"><br><br>-->
+    <label for="image">Обложка:</label>
+    <input type="file" id="image" name="image"><br><br>
 
     <h1>Добавление книги</h1>
 

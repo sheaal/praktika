@@ -82,7 +82,6 @@
                 <a href="<?= app()->route->getUrl('/signup') ?>">Добавление библиотекарей</a>
                 <a href="<?= app()->route->getUrl('/selection') ?>">Выборка</a>
             <?php elseif (app()->auth::user()->id_role == 2): // 2 = Библиотека?>
-                <a href="<?= app()->route->getUrl('/signup') ?>">Регистрация</a>
                 <a href="<?= app()->route->getUrl('/add_book') ?>">Добавление книг</a>
                 <a href="<?= app()->route->getUrl('/add_reader') ?>">Добавление читателей</a>
             <?php endif; ?>
