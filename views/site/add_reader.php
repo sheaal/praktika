@@ -46,11 +46,10 @@
 </head>
 <body>
 <h1>Добавление читателя</h1>
-<form class="read-cont" method="POST">
+<h3><?= $message ?? ''; ?></h3>
+<form class="read-cont" method="POST" enctype="multipart/form-data">
     <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
     <div class="read-block">
-        <label for="card_number">Номер читательского билета:</label>
-        <input type="text" id="card_number" name="card_number" required>
 
         <label for="surname">Фамилия:</label>
         <input type="text" id="surname" name="surname" required>
@@ -75,9 +74,9 @@
 
         <button class="read-btn" type="submit">Добавить</button>
 
-        <?php if ($message): ?>
-            <h3><?= htmlspecialchars($message) ?></h3>
-        <?php endif; ?>
+<!--        --><?php //if ($message): ?>
+<!--            <h3>--><?php //= htmlspecialchars($message) ?><!--</h3>-->
+<!--        --><?php //endif; ?>
     </div>
 </form>
 </body>
