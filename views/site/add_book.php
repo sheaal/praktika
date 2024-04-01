@@ -30,11 +30,11 @@
 </style>
 
 <body>
-
+<h3><?= $message ?? ''; ?></h3>
 <form class="form-book" method="post" enctype="multipart/form-data">
 
-    <label for="image">Фотография:</label>
-    <input type="file" id="image" name="image"><br><br>
+<!--    <label for="image">Фотография:</label>-->
+<!--    <input type="file" id="image" name="image"><br><br>-->
 
     <h1>Добавление книги</h1>
 
@@ -43,8 +43,18 @@
 <!--            <label for="image">Обложка:</label>-->
 <!--            <input type="file" id="image" name="image"><br><br>-->
 
-            <label for="author">Автор:</label>
-            <input type="text" id="author" name="id_author"><br><br>
+
+
+        <label>
+            <select name="id_author">
+                <option value="">Автор</option>
+                <?php foreach ($authors as $author) { ?>
+                    <option value="<?php echo $author->id_author; ?>">
+                        <?php echo $author->surname; ?>
+                    </option>
+                <?php } ?>
+            </select>
+        </label>
 
             <label for="title">Название:</label>
             <input type="text" id="title" name="title"><br><br>
@@ -60,9 +70,9 @@
 
             <button type="submit">Добавить</button>
 
-            <?php if ($message): ?>
-                <h3><?= htmlspecialchars($message) ?></h3>
-            <?php endif; ?>
+<!--            --><?php //if ($message): ?>
+<!--                <h3>--><?php //= htmlspecialchars($message) ?><!--</h3>-->
+<!--            --><?php //endif; ?>
     </div>
 
 </form>

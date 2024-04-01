@@ -7,18 +7,14 @@ use Src\Validator\AbstractValidator;
 
 class AddBookValidator extends AbstractValidator
 {
-    protected string $message = 'The :field must be filled and unique';
-
+    protected string $message = 'The :field must be filled and contain only digits';
 
     public function rule(): bool
     {
-
-        $book = Capsule::table('books')
-            ->where('title', $this->value)
-            ->where('id_author', $this->args[0])
-            ->where('annotation', $this->args[1])
-            ->count();
-
-        return $book === 0 && !empty($this->value);
+        $symbols = '!@#$%^&*()_+}{":?><';
+        if(preg_match('/['.$symbols.']/', $this->value)){
+            return false;
+        }
+        return true;
     }
 }
