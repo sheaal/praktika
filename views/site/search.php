@@ -70,6 +70,8 @@
         <br>
         <button class="sear-btn" type="submit">Найти</button>
     </form>
+
+
 </main>
 
 </body>

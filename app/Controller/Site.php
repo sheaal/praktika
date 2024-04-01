@@ -10,12 +10,18 @@ use Src\Auth\Auth;
 use Src\View;
 use Src\Request;
 use Model\User;
+use Model\BookDistribution;
 use Src\Validator\Validator;
+use Validators\AddBookValidator;
 
 
 class Site
 
 {
+//    public function __construct(Request $request)
+//    {
+//        $this->request = $request;
+//    }
 
     public function hello(): string
     {
@@ -157,6 +163,7 @@ class Site
 
             Book::create($data);
             $message = 'Книга успешно добавлена!';
+
         }
 
         return new View('site.add_book', ['title' => $title, 'message' => $message]);
@@ -171,6 +178,12 @@ class Site
     {
         return new View('site.selection', ['message' => 'hello working']);
     }
+    public function bookDistribution(Request $request): string
 
+    {
+        $title = BookDistribution::all();
+
+        return (new View())->render('site.book_distribution', ['distribution' => $title]);
+    }
 }
 

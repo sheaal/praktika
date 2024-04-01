@@ -124,8 +124,8 @@
                 <p>...</p>
             </div>
             <a href="#">Ещё</a>
-</div>
-</section>
+        </div>
+    </section>
 </div>
 </body>
 </html>

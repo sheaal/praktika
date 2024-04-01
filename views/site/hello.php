@@ -41,5 +41,4 @@
             <h2><?= htmlspecialchars($book->title) ?></h2>
         </div>
     <?php endforeach; ?>
-
 </div>
