@@ -51,6 +51,21 @@ class Auth
         return false;
     }
 
+    public static function checkAdmin(): bool
+    {
+        if (self::$user->roleID() == 1) {
+            return true;
+        }
+        return false;
+    }
+    public static function checkLibrarian(): bool
+    {
+        if (self::$user->roleID() == 2) {
+            return true;
+        }
+        return false;
+    }
+
     //Выход текущего пользователя
     public static function logout(): bool
     {

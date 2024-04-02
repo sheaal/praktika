@@ -80,10 +80,10 @@
         <?php if (app()->auth::check()): ?>
             <?php if (app()->auth::user()->id_role == 1): // 1 = Администратор?>
                 <a href="<?= app()->route->getUrl('/signup') ?>">Добавление библиотекарей</a>
-                <a href="<?= app()->route->getUrl('/selection') ?>">Выборка</a>
             <?php elseif (app()->auth::user()->id_role == 2): // 2 = Библиотека?>
                 <a href="<?= app()->route->getUrl('/add_book') ?>">Добавление книг</a>
                 <a href="<?= app()->route->getUrl('/add_reader') ?>">Добавление читателей</a>
+                <a href="<?= app()->route->getUrl('/selection') ?>">Выборка</a>
                 <a href="<?= app()->route->getUrl('/book_distribution') ?>">Выдача книг</a>
             <?php endif; ?>
             <a href="<?= app()->route->getUrl('/logout') ?>">Выход (<?= app()->auth::user()->name ?>)</a>
