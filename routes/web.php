@@ -17,7 +17,7 @@ Route::add(['GET', 'POST'], '/add_reader', [Controller\Site::class, 'addReader']
     ->middleware('librarian');
 Route::add('GET', '/add_librarian', [Controller\Site::class, 'addLibrarian'])
     ->middleware('auth');
-Route::add('GET', '/selection', [Controller\Site::class, 'selection'])
+Route::add(['GET', 'POST'], '/selection', [Controller\Site::class, 'selection'])
     ->middleware('librarian');
 Route::add(['GET', 'POST'], '/book_distribution', [Controller\Site::class, 'bookDistribution'])
     ->middleware('librarian');

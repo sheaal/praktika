@@ -21,10 +21,7 @@ return [
         'addbook' => \Validators\AddBookValidator::class,
         'addreader' => \Validators\AddreaderValidator::class,
         'alpha' => \Validators\AddreaderValidator::class,
-        'alpha_num' => \Validators\AddreaderValidator::class,
-        'regex' => \Validators\AddreaderValidator::class,
         'digits' => \Validators\AddreaderValidator::class,
-        'phone_no_letters' => \Validators\AddreaderValidator::class,
     ]
 
 ];

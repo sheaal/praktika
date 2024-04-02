@@ -18,6 +18,6 @@ class AddreaderValidator extends AbstractValidator
         'name' => ['required', 'alpha'],
         'patronymic' => ['alpha_num'],
         'gender' => ['in:male,female'],
-        'phone' => ['required', 'phone_no_letters']
+//        'phone' => ['required', 'digits:11' ]
         ];
 }

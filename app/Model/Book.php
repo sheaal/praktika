@@ -9,6 +9,13 @@ class Book extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    public static function all($columns = ['*'])
+    {
+        return static::query()->get(
+
+            is_array($columns) ? $columns : func_get_args()
+        );
+    }
     protected $fillable = [
         'title',
         'id_author',
