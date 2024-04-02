@@ -5,6 +5,7 @@ namespace Controller;
 use Illuminate\Database\Capsule\Manager as DB;
 use Model\Post;
 use Model\Book;
+use Model\Reader;
 use Model\Author;
 use Model\Addreader;
 use Src\Auth\Auth;
@@ -125,31 +126,50 @@ class Site
     }
     public function addReader(Request $request): string
     {
-        $readers = Addreader::all();
-        if ($request->method === 'POST') {
-
-            $validator = new Validator($request->all(), [
-                'surname' => ['required', 'alpha'],
-                'name' => ['required', 'alpha'],
-                'patronymic' => ['required', 'alpha'],
-                'phone' => ['required','regex:/^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/']
-            ], [
-                'required' => 'Поле :field пусто',
-                'alpha' => 'Поле :field не должно содержать цифры',
-                'alpha_num' => 'Поле :field не должно содержать специальных символов',
-                'regex' => 'Поле :field не должно содержать буквы'
-            ]);
-
-            if($validator->fails()){
-                return new View('site.add_reader',
-                    ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE),
-                        'readers' => $readers
-                    ]);
-            }
-
+        $title = Reader::all();
+        if ($request->method === 'POST' && Reader::create($request->all())) {
+            $message = 'Читатель успешно добавлен!';
+        } else {
+            $message = '';
         }
-        return new View('site.add_reader');
+
+        return new View('site.add_reader', ['title' => $title, 'message' => $message]);
     }
+//    public function addReader(Request $request): string
+//    {
+//        $readers = Addreader::all();
+//        if ($request->method === 'POST') {
+//
+//            $validator = new Validator($request->all(), [
+//                'surname' => ['required', 'alpha'],
+//                'name' => ['required', 'alpha'],
+//                'patronymic' => ['required', 'alpha'],
+//                'phone' => ['required', 'phone_no_letters']
+//            ], [
+//                'required' => 'Поле :field пусто',
+//                'alpha' => 'Поле :field не должно содержать цифры',
+//                'alpha_num' => 'Поле :field не должно содержать специальных символов',
+//                'phone_no_letters' => 'Поле :field не должно содержать буквы'
+////                'regex' => 'Поле :field не должно содержать буквы'
+//            ]);
+//
+//            if($validator->fails()){
+//                return new View('site.add_reader',
+//                    ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE),
+//                        'readers' => $readers
+//                    ]);
+//            }
+//
+//            $title = Reader::all();
+//            if ($request->method === 'POST' && Reader::create($request->all())) {
+//                $message = 'Читатель успешно добавлен!';
+//            } else {
+//                $message = '';
+//            }
+//
+//        }
+//        return new View('site.add_reader');
+//    }
 
 
     public function addBook(Request $request): string
@@ -219,9 +239,17 @@ class Site
     public function bookDistribution(Request $request): string
 
     {
-        $title = BookDistribution::all();
+        $books = Book::all();
+        $readers = Reader::all();
+        $book_distribution = BookDistribution::all();
 
-        return (new View())->render('site.book_distribution', ['distribution' => $title]);
+        if ($request->method === 'POST' && BookDistribution::create($request->all())) {
+            $message = 'Выдача прошла успешно!';
+            app()->route->redirect('/book_distribution');
+        }
+
+        return new View('site.book_distribution', ['book_distribution' => $book_distribution,
+            'books' => $books, 'readers' => $readers]);
     }
 }
 

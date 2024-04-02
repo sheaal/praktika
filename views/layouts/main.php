@@ -74,7 +74,7 @@
         <a href="<?= app()->route->getUrl('/hello') ?>">Главная</a>
         <a href="<?= app()->route->getUrl('/search') ?>">Поиск</a>
         <?php if (!app()->auth::check()): ?>
-            <a href="<?= app()->route->getUrl('/signup') ?>">Регистрация</a>
+<!--            <a href="--><?php //= app()->route->getUrl('/signup') ?><!--">Регистрация</a>-->
             <a href="<?= app()->route->getUrl('/login') ?>">Вход</a>
         <?php endif; ?>
         <?php if (app()->auth::check()): ?>

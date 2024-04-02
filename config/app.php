@@ -22,6 +22,7 @@ return [
         'alpha_num' => \Validators\AddreaderValidator::class,
         'regex' => \Validators\AddreaderValidator::class,
         'digits' => \Validators\AddreaderValidator::class,
+        'phone_no_letters' => \Validators\AddreaderValidator::class,
     ]
 
 ];
