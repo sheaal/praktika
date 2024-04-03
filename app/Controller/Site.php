@@ -232,25 +232,35 @@ class Site
     {
         return new View('site.add_librarian', ['message' => 'hello working']);
     }
-    public function selection(Request $request): string
+    public function selection($request): string
     {
         $books = Book::all();
         $readers = Reader::all();
         $book_distribution = BookDistribution::all();
 
-        if ($request->method === 'POST' && BookDistribution::create($request->all())) {
-            app()->route->redirect('/selection');
-        }
-        if ($request->method === 'POST' && Book::create($request->all())) {
-            app()->route->redirect('/selection');
-        }
-        if ($request->method === 'POST' && Reader::create($request->all())) {
-            app()->route->redirect('/selection');
+        // Проверяем была ли отправлена форма
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_read_ticket'])) {
+            $selected_reader_id = $_POST['id_read_ticket'];
+
+            $selected_reader = null;
+            foreach ($readers as $reader) {
+                if ($reader->id_read_ticket == $selected_reader_id) {
+                    $selected_reader = $reader;
+                    break;
+                }
+            }
+
+            return new View('site.selection', [
+                'book_distribution' => $book_distribution,
+                'books' => $books,
+                'readers' => $readers,
+                'selected_reader' => $selected_reader
+            ]);
         }
 
-        return new View('site.selection', ['book_distribution' => $book_distribution,
-            'books' => $books, 'readers' => $readers]);
+        return new View('site.selection', ['book_distribution' => $book_distribution, 'books' => $books, 'readers' => $readers]);
     }
+
 
 
 //        // Получаем список читателей

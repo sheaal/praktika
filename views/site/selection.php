@@ -57,7 +57,7 @@
 
 </style>
 <body>
-<h1>Выборка</h1>
+<!-- Убедитесь, что форма отправляет данные на сервер -->
 <form class="form-distr" method="post">
     <div class="sel-block">
         <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
@@ -70,104 +70,39 @@
                     </option>
                 <?php endforeach; ?>
             </select>
-            <button id="select-btn">Выбрать</button>
+            <button type="submit" id="select-btn">Выбрать</button>
         </div>
     </div>
 </form>
 
-<div class="selection-bl">
-    <?php foreach ($readers as $reader): ?>
-    <h2>Информация о читателе:</h2>
+<!-- Отображение информации о выбранном читателе -->
+<?php if (isset($selected_reader)): ?>
+    <div class="selection-bl">
+        <h2>Информация о читателе:</h2>
         <div class="distr">
-            <p>Фамилия: <?= htmlspecialchars($reader->surname) ?></p>
-            <p>Отчество: <?= htmlspecialchars($reader->patronymic) ?></p>
+            <p>Фамилия: <?= htmlspecialchars($selected_reader->surname) ?></p>
+            <p>Отчество: <?= htmlspecialchars($selected_reader->patronymic) ?></p>
         </div>
-    <?php foreach ($book_distribution as $distribution): ?>
-        <?php if($distribution["id_read_ticket"]==$reader["id_read_ticket"]) : ?>
 
-            <div class="distr">
-                <?php foreach ($books as $book): ?>
-                <?php if($distribution["id_book"]==$book["id_book"]) : ?>
-                <p>Название книги: <?= htmlspecialchars($book->title) ?></p>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-                <p>Дата выдачи: <?= htmlspecialchars($distribution->date_issue) ?></p>
-                <p>Дата возврата: <?= htmlspecialchars($distribution->return_date) ?></p>
-                <p>Статус: <?= htmlspecialchars($distribution->status) ?></p>
-            </div>
+        <?php foreach ($book_distribution as $distribution): ?>
+            <?php if ($distribution->id_read_ticket == $selected_reader->id_read_ticket): ?>
+                <div class="distr">
+                    <p>Название книги:
+                        <?php foreach ($books as $book): ?>
+                            <?php if ($distribution->id_book == $book->id_book): ?>
+                                <?= htmlspecialchars($book->title) ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </p>
+                    <p>Дата выдачи: <?= htmlspecialchars($distribution->date_issue) ?></p>
+                    <p>Дата возврата: <?= htmlspecialchars($distribution->return_date) ?></p>
+                    <p>Статус: <?= htmlspecialchars($distribution->status) ?></p>
+                </div>
             <?php endif; ?>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
 
-
-    <?php endforeach; ?>
-</div>
-
-<!--    <section>-->
-<!--        <h1>Книги на руках</h1>-->
-<!--        <div class="p-block" >-->
-<!--            <div class="check-item">-->
-<!--                <input type="checkbox">-->
-<!--                <p>...</p>-->
-<!--            </div>-->
-<!--            <div class="check-item">-->
-<!--                <input type="checkbox">-->
-<!--                <p>...</p>-->
-<!--            </div>-->
-<!--            <div class="check-item">-->
-<!--                <input type="checkbox">-->
-<!--                <p>...</p>-->
-<!--            </div>-->
-<!--            <div class="check-item">-->
-<!--                <input type="checkbox">-->
-<!--                <p>...</p>-->
-<!--            </div>-->
-<!--            <a href="#">Ещё</a>-->
-<!--        </div>-->
-<!--    </section>-->
-<!--    <section>-->
-<!--        <h1>История выдачи книг</h1>-->
-<!--        <div class="p-block" >-->
-<!--            <div class="check-item">-->
-<!--                <input type="checkbox">-->
-<!--                <p>...</p>-->
-<!--            </div>-->
-<!--            <div class="check-item">-->
-<!--                <input type="checkbox">-->
-<!--                <p>...</p>-->
-<!--            </div>-->
-<!--            <div class="check-item">-->
-<!--                <input type="checkbox">-->
-<!--                <p>...</p>-->
-<!--            </div>-->
-<!--            <div class="check-item">-->
-<!--                <input type="checkbox">-->
-<!--                <p>...</p>-->
-<!--            </div>-->
-<!--            <a href="#">Ещё</a>-->
-<!--        </div>-->
-<!--    </section>-->
-<!--    <section>-->
-<!--        <h1>Популярные книги</h1>-->
-<!--        <div class="p-block" >-->
-<!--            <div class="check-item">-->
-<!--                <input type="checkbox">-->
-<!--                <p>...</p>-->
-<!--            </div>-->
-<!--            <div class="check-item">-->
-<!--                <input type="checkbox">-->
-<!--                <p>...</p>-->
-<!--            </div>-->
-<!--            <div class="check-item">-->
-<!--                <input type="checkbox">-->
-<!--                <p>...</p>-->
-<!--            </div>-->
-<!--            <div class="check-item">-->
-<!--                <input type="checkbox">-->
-<!--                <p>...</p>-->
-<!--            </div>-->
-<!--            <a href="#">Ещё</a>-->
-<!--        </div>-->
-<!--    </section>-->
 </div>
 </body>
 </html>
