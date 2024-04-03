@@ -144,7 +144,7 @@ class Site
                 'surname' => ['required', 'alpha'],
                 'name' => ['required', 'alpha'],
                 'patronymic' => ['required', 'alpha'],
-                'phone' => ['required', 'digits:11' => 'Поле :field должно содержать ровно 11 цифр'],
+//                'phone' => ['required', 'digits:11' => 'Поле :field должно содержать ровно 11 цифр'],
             ], [
                 'required' => 'Поле :field пусто',
                 'alpha' => 'Поле :field не должно содержать цифры',
@@ -195,8 +195,9 @@ class Site
             }
 
             if (Book::create($request->all())) {
-                app()->route->redirect('/add_book');
                 $message = 'Книга успешно добавлена!';
+                app()->route->redirect('/add_book');
+
             }
 
         }

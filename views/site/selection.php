@@ -37,11 +37,19 @@
     p{
         margin-top: 10px;
         margin-left: 10px;
-        color: black;
+        color: white;
     }
     a{
         margin-top: 10px;
         margin-left: 10px;
+        color: white;
+    }
+    .selection-bl{
+        width: 300px;
+        height: 300px;
+        background-color: #472d6d;
+        border-radius: 10px;
+        padding: 7px 0 0 10px;
         color: white;
     }
 
@@ -50,7 +58,11 @@
         align-items: center;
         margin-bottom: 10px;
     }
-
+    button{
+        background-color: #7e60a8;
+        border-radius: 5px;
+        color: white;
+    }
     .check-item input[type="checkbox"] {
         margin-right: 10px;
     }
