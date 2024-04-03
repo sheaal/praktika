@@ -19,11 +19,11 @@ return [
         'required' => \Validators\RequireValidator::class,
         'unique' => \Validators\UniqueValidator::class,
         'addbook' => \Validators\AddBookValidator::class,
+        'book_distribution' => \Validators\BookDistributionValidator::class,
         'addreader' => \Validators\AddreaderValidator::class,
-        'alpha' => \Validators\AddreaderValidator::class,
-        'alpha_num' => \Validators\AddreaderValidator::class,
-//        'regex' => \Validators\AddreaderValidator::class,
-//        'digits' => \Validators\AddreaderValidator::class,
+//        'date' => \Validators\BookDistributionValidator::class,
+//        'before_or_equal' => \Validators\BookDistributionValidator::class,
+
     ]
 
 ];

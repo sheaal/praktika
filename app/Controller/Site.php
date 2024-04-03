@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use DateTime;
 use Illuminate\Database\Capsule\Manager as DB;
 use Model\Post;
 use Model\Book;
@@ -124,17 +125,6 @@ class Site
         // Display the search form
         return new View('site.search', ['message' => 'hello working']);
     }
-//    public function addReader(Request $request): string
-//    {
-//        $title = Reader::all();
-//        if ($request->method === 'POST' && Reader::create($request->all())) {
-//            $message = 'Читатель успешно добавлен!';
-//        } else {
-//            $message = '';
-//        }
-//
-//        return new View('site.add_reader', ['title' => $title, 'message' => $message]);
-//    }
     public function addReader(Request $request): string
     {
         $readers = Addreader::all();
@@ -205,29 +195,6 @@ class Site
 
     }
 
-//    public function addBook(Request $request): string
-//    {
-//        $title = Book::all();
-//        $message = '';
-//
-//        if ($request->method === 'POST') {
-//            $data = $request->all();
-//
-//            // Handle image upload
-//            if (isset($data['image']) && $data['image']['name']) {
-//                $imageName = time() . '_' . basename($data['image']['name']);
-//                move_uploaded_file($data['image']['tmp_name'], public_path('images') . $imageName);
-//                $data['image'] = 'images/' . $imageName;
-//            }
-//
-//            Book::create($data);
-//            $message = 'Книга успешно добавлена!';
-//
-//        }
-//
-//        return new View('site.add_book', ['title' => $title, 'message' => $message]);
-//    }
-
 
     public function addLibrarian(): string
     {
@@ -250,7 +217,6 @@ class Site
                     break;
                 }
             }
-
             return new View('site.selection', [
                 'book_distribution' => $book_distribution,
                 'books' => $books,
@@ -262,44 +228,29 @@ class Site
         return new View('site.selection', ['book_distribution' => $book_distribution, 'books' => $books, 'readers' => $readers]);
     }
 
-
-
-//        // Получаем список читателей
-//        $readers = Reader::all();
-//
-//        // Обрабатываем запрос на выбор читателя
-//        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//            // Получаем id читателя
-//            $idReadTicket = $_POST['id_read_ticket'];
-//
-//            // Получаем информацию о читателе
-//            $reader = Reader::find($idReadTicket);
-//
-//            // Получаем книги на руках
-//            $books = BookDistribution::where('id_read_ticket', $idReadTicket)
-//                ->whereIn('status', ['issued', 'overdue'])
-//                ->get();
-//
-////            // Возвращаем ответ в виде JSON
-////            return json_encode([
-////                'reader' => $reader,
-////                'books' => $books
-////            ]);
-//            if ($request->method === 'POST' && BookDistribution::create($request->all())) {
-//                app()->route->redirect('/selection');
-//            }
-//        }
-
     public function bookDistribution(Request $request): string
-
     {
         $books = Book::all();
         $readers = Reader::all();
         $book_distribution = BookDistribution::all();
 
-        if ($request->method === 'POST' && BookDistribution::create($request->all())) {
-            $message = 'Выдача прошла успешно!';
-            app()->route->redirect('/book_distribution');
+        if ($request->method === 'POST') {
+            $date_issue = new \DateTime($request->input('date_issue'));
+            $return_date = new \DateTime($request->input('return_date'));
+
+            if ($date_issue > $return_date) {
+                return new View('site.book_distribution', [
+                    'message' => '!Дата выдачи не может быть позже даты возврата!',
+                    'book_distribution' => $book_distribution,
+                    'books' => $books,
+                    'readers' => $readers
+                ]);
+            } else {
+                if (BookDistribution::create($request->all())) {
+                    $message = 'Выдача прошла успешно!';
+                    app()->route->redirect('/book_distribution');
+                }
+            }
         }
 
         return new View('site.book_distribution', ['book_distribution' => $book_distribution,

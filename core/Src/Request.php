@@ -44,4 +44,9 @@ class Request
         }
         throw new Error('Accessing a non-existent property');
     }
+
+    public function input($key)
+    {
+        return $_REQUEST[$key] ?? null;
+    }
 }

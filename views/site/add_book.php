@@ -33,17 +33,10 @@
 <h3><?= $message ?? ''; ?></h3>
 <form class="form-book" method="post" enctype="multipart/form-data">
 
-<!--    <label for="image">Фотография:</label>-->
-<!--    <input type="file" id="image" name="image"><br><br>-->
-
     <h1>Добавление книги</h1>
 
     <div class="form-cont">
             <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
-<!--            <label for="image">Обложка:</label>-->
-<!--            <input type="file" id="image" name="image"><br><br>-->
-
-
 
         <label>
             <select name="id_author">
@@ -69,12 +62,7 @@
             <textarea id="annotation" name="annotation"></textarea><br><br>
 
             <button type="submit">Добавить</button>
-
-<!--            --><?php //if ($message): ?>
-<!--                <h3>--><?php //= htmlspecialchars($message) ?><!--</h3>-->
-<!--            --><?php //endif; ?>
     </div>
-
 </form>
 
 </body>

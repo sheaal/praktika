@@ -61,6 +61,18 @@
             </select>
 
             <button type="submit">Добавить</button>
+
+            <?php
+            if (!empty($errors)) {
+                echo '<div class="errors">';
+                foreach ($errors as $field => $fieldErrors) {
+                    foreach ($fieldErrors as $error) {
+                        echo '<p class="error">' . $error . '</p>';
+                    }
+                }
+                echo '</div>';
+            }
+            ?>
         </div>
 </div>
 
