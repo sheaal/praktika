@@ -15,7 +15,7 @@ use Src\Request;
 use Model\User;
 use Model\BookDistribution;
 use Src\Validator\Validator;
-
+use Validators\BookDistributionValidator;
 
 
 class Site
@@ -235,26 +235,41 @@ class Site
         $book_distribution = BookDistribution::all();
 
         if ($request->method === 'POST') {
-            $date_issue = new \DateTime($request->input('date_issue'));
-            $return_date = new \DateTime($request->input('return_date'));
 
-            if ($date_issue > $return_date) {
-                return new View('site.book_distribution', [
-                    'message' => '!Дата выдачи не может быть позже даты возврата!',
-                    'book_distribution' => $book_distribution,
-                    'books' => $books,
-                    'readers' => $readers
-                ]);
-            } else {
-                if (BookDistribution::create($request->all())) {
-                    $message = 'Выдача прошла успешно!';
-                    app()->route->redirect('/book_distribution');
-                }
+            $validator = new BookDistributionValidator();
+            $errors = $validator->rule($request->all());
+
+            if (!empty($errors)) {
+                return new View('site.book_distribution', ['message' => json_encode($errors, JSON_UNESCAPED_UNICODE)]);
+            }
+
+            if (BookDistribution::create($request->all())) {
+                $message = 'Выдача прошла успешно!';
+                app()->route->redirect('/book_distribution');
             }
         }
 
-        return new View('site.book_distribution', ['book_distribution' => $book_distribution,
-            'books' => $books, 'readers' => $readers]);
+        return new View('site.book_distribution', ['book_distribution' => $book_distribution, 'books' => $books, 'readers' => $readers]);
     }
+
+        //        if ($request->method === 'POST') {
+//            $date_issue = new \DateTime($request->input('date_issue'));
+//            $return_date = new \DateTime($request->input('return_date'));
+//
+//            if ($date_issue > $return_date) {
+//                return new View('site.book_distribution', [
+//                    'message' => '!Дата выдачи не может быть позже даты возврата!',
+//                    'book_distribution' => $book_distribution,
+//                    'books' => $books,
+//                    'readers' => $readers
+//                ]);
+//            } else {
+//                if (BookDistribution::create($request->all())) {
+//                    $message = 'Выдача прошла успешно!';
+//                    app()->route->redirect('/book_distribution');
+//                }
+//            }
+//        }
+
 }
 
